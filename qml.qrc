@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>ViewKeyList.qml</file>
+        <file>DataField.qml</file>
+        <file>ViewData.qml</file>
+    </qresource>
+</RCC>

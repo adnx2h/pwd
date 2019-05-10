@@ -1,0 +1,44 @@
+{
+    "Bankero": {
+        "Notes": "notasdelbanco",
+        "Pwd": "1qwere",
+        "Site": "www.bank.com",
+        "User": "BankUser"
+    },
+    "Final": {
+        "Notes": "ended",
+        "Pwd": "Welcome",
+        "Site": "awesome",
+        "User": "FinalUser"
+    },
+    "Gmail": {
+        "Notes": "oiuytrlkjhg",
+        "Pwd": "Gmailqwe",
+        "Site": "www.adnx2h.com",
+        "User": "GmailUser"
+    },
+    "Gmail2": {
+        "Notes": "22oiuytrlkjhg",
+        "Pwd": "Gqwe",
+        "Site": "www.adnx22.com",
+        "User": "Gmail2User"
+    },
+    "Mercado": {
+        "Notes": "Merca7654rlkjhg",
+        "Pwd": "Mercaqwere",
+        "Site": "www.Mercad.com",
+        "User": "MercadoUser"
+    },
+    "Telcel": {
+        "Notes": "telcerywcrykjhg",
+        "Pwd": "TelPwd",
+        "Site": "www.telcel.com",
+        "User": "TelUser"
+    },
+    "Telco": {
+        "Notes": "telcocrykjhg",
+        "Pwd": "TelcoPwd",
+        "Site": "www.telco.com",
+        "User": "TelcoUser"
+    }
+}
