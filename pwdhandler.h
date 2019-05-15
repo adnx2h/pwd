@@ -24,7 +24,7 @@ public:
 private:
     QStringList jsonKeys, jsonUsers, jsonPwds, jsonSites, jsonNotes;
     quint16 m_CurrentIndex;
-    QString myFile = "C:/Users/agonz141/Desktop/Own/QT-Projects/PwdApp/test.json";
+    QString myFile = "./test.json";
 
     //Saves to "myFile" what is in "jsonKeys, jsonUsers, jsonPwds, jsonSites, jsonNotes"
     void saveToJsonFile();

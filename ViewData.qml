@@ -1,110 +1,173 @@
 import QtQuick 2.0
-import QtQuick.Controls 2.0
+import QtQuick.Controls 2.5
+import QtQuick.Layouts 1.3
+import QtQuick.Layouts 1.0
 
 Item {
     id: id_DataForm
     width: 480; height: 800
     state: ""
     onStateChanged: console.log("==State changed to: "+ id_DataForm.state)
-    Column {
-        x: 40
-        y: 31
-        spacing: 15
-        DataField{
-            id: id_keyTxt
-            pr_readOnly: true
-            pr_text: ""
+    GroupBox{
+        id: id_viewDataBox
+        title: "Account details"
+        anchors.fill: parent
+        anchors.margins: 12
+        anchors.bottomMargin: 20
+
+        label: Label{
+            text: "Account details"
+            color: globalFontColor
+            font.pixelSize: 20
         }
-        DataField{
-            id: id_userTxt
-            focus: true
-        }
-        DataField{
-            id: id_pwdTxt
-        }
-        DataField{
-            id: id_siteTxt
-        }
-        DataField{
-            id: id_notesTxt
-            height: 300
+
+        ColumnLayout {
+            anchors.fill: parent
+
+            DataField{
+                id: id_keyTxt
+            }
+            DataField{
+                id: id_userTxt
+            }
+            DataField{
+                id: id_pwdTxt
+            }
+            DataField{
+                id: id_siteTxt
+            }
+            DataField{
+                id: id_notesTxt
+                Layout.rowSpan: 5
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+            }
+
+            RowLayout{
+                RoundButton {
+                    id: id_btnSave
+                    Layout.fillWidth: true
+                    visible: false
+                    text: qsTr("Save")
+                    radius: 5
+                    font.bold: true
+                    palette {
+                        button: "#2A4B8D"
+                    }
+                    ColorAnimation {
+                        from: "#4B62C1"
+                        to: "#2A4B8D"
+                        duration: 200
+                    }
+                    onClicked: {
+                        idPwdHandler.saveEditedValues(id_keyTxt.text, id_userTxt.text, id_pwdTxt.text, id_siteTxt.text, id_notesTxt.text)
+                        //            idPwdHandler.loadJsonFile()
+                        id_SwipeView.currentIndex = 0
+                    }
+                }
+
+                RoundButton {
+                    id: id_btnDelete
+                    Layout.fillWidth: true
+                    visible: false
+                    text: qsTr("Delete")
+                    radius: 5
+                    font.bold: true
+                    palette {
+                        button: "#2A4B8D"
+                    }
+                    ColorAnimation {
+                        from: "#4B62C1"
+                        to: "#2A4B8D"
+                        duration: 200
+                    }
+                    onClicked: {
+                        id_DataForm.state = "stDelete"
+                    }
+                }
+                RoundButton {
+                    id: id_btnConfirmDel
+                    Layout.fillWidth: true
+                    visible: false
+                    text: qsTr("Confirm Delete")
+                    radius: 5
+                    font.bold: true
+                    palette {
+                        button: "#2A4B8D"
+                    }
+                    ColorAnimation {
+                        from: "#4B62C1"
+                        to: "#2A4B8D"
+                        duration: 200
+                    }
+                    onClicked: {
+                        idPwdHandler.deleteDataOfCurrentIndex()
+                        id_SwipeView.currentIndex = 0
+                    }
+                }
+                RoundButton {
+                    id: id_btnCancel
+                    Layout.fillWidth: true
+                    visible: false
+                    text: qsTr("Cancel")
+                    radius: 5
+                    font.bold: true
+                    palette {
+                        button: "#2A4B8D"
+                    }
+                    ColorAnimation {
+                        from: "#4B62C1"
+                        to: "#2A4B8D"
+                        duration: 200
+                    }
+                    onClicked: {
+                        id_SwipeView.currentIndex = 0
+                        id_DataForm.state = "stAdd"
+                    }
+                }
+                RoundButton {
+                    id: id_btnEdit
+                    Layout.fillWidth: true
+                    visible: false
+                    text: qsTr("Edit")
+                    radius: 5
+                    font.bold: true
+                    palette {
+                        button: "#2A4B8D"
+                    }
+                    ColorAnimation {
+                        from: "#4B62C1"
+                        to: "#2A4B8D"
+                        duration: 200
+                    }
+                    onClicked: {
+                        id_DataForm.state = "stEdit"
+                        //            idPwdHandler.saveEditedValues(id_keyTxt.pr_text, id_userTxt.pr_text, id_pwdTxt.pr_text, id_siteTxt.pr_text, id_notesTxt.pr_text)
+                    }
+                }
+            }
         }
     }
 
-    Button {
-        id: id_btnSave
-        x: 40; y: 663;
-        width: 150; height: 60
-        visible: false
-        text: qsTr("Save")
-        onClicked: {
-            idPwdHandler.saveEditedValues(id_keyTxt.pr_text, id_userTxt.pr_text, id_pwdTxt.pr_text, id_siteTxt.pr_text, id_notesTxt.pr_text)
-//            idPwdHandler.loadJsonFile()
-            id_SwipeView.currentIndex = 0
-        }
-    }
-    Button {
-        id: id_btnDelete
-        x: 290; y: 663;
-        width: 150; height: 60
-        visible: false
-        text: qsTr("Delete")
-        onClicked: {
-            id_DataForm.state = "stDelete"
-        }
-    }
-    Button {
-        id: id_btnConfirmDel
-        x: 40; y: 663
-        width: 150; height: 60
-        visible: false
-        text: qsTr("Confirm Delete")
-        onClicked: {
-            idPwdHandler.deleteDataOfCurrentIndex()
-            id_SwipeView.currentIndex = 0
-        }
-    }
-    Button {
-        id: id_btnCancel
-        x: 290; y: 663;
-        width: 150; height: 60
-        visible: false
-        text: qsTr("Cancel")
-        onClicked: {
-            id_SwipeView.currentIndex = 0
-            id_DataForm.state = "stAdd"
-        }
-    }
-    Button {
-        id: id_btnEdit
-        x: 40; y: 663;
-        width: 150; height: 60
-        visible: false
-        text: qsTr("Edit")
-        onClicked: {
-            id_DataForm.state = "stEdit"
-            //            idPwdHandler.saveEditedValues(id_keyTxt.pr_text, id_userTxt.pr_text, id_pwdTxt.pr_text, id_siteTxt.pr_text, id_notesTxt.pr_text)
-        }
-    }
     Connections{
         target: idPwdHandler
         onSendPwdDetails:{
-            id_keyTxt.pr_text = key
-            id_userTxt.pr_text = user
-            id_pwdTxt.pr_text = pwd
-            id_siteTxt.pr_text = site
-            id_notesTxt.pr_text = notes
-//            id_DataForm.state = "stView"
+            id_keyTxt.text = key
+            id_userTxt.text = user
+            id_pwdTxt.text = pwd
+            id_siteTxt.text = site
+            id_notesTxt.text = notes
+            //            id_DataForm.state = "stView"
         }
     }
     states:[
         State{
             name: "stAdd"
-            PropertyChanges { target:id_keyTxt; pr_defaultText: "id"; pr_readOnly: false; pr_textColor: "gray"; pr_text: ""}
-            PropertyChanges { target:id_userTxt; pr_defaultText: "User"; pr_readOnly: false; pr_textColor: "gray"; pr_text: ""}
-            PropertyChanges { target:id_pwdTxt; pr_defaultText: "pwd"; pr_readOnly: false; pr_textColor: "gray"; pr_text: ""}
-            PropertyChanges { target:id_siteTxt; pr_defaultText: "website"; pr_readOnly: false; pr_textColor: "gray"; pr_text: ""}
-            PropertyChanges { target:id_notesTxt; pr_defaultText: "notes..."; pr_readOnly: false; pr_textColor: "gray"; pr_text: ""}
+            PropertyChanges { target:id_keyTxt; placeholderText: "id"; readOnly: false; placeholderTextColor: "gray"; text: ""}
+            PropertyChanges { target:id_userTxt; placeholderText: "User"; readOnly: false; placeholderTextColor: "gray"; text: ""}
+            PropertyChanges { target:id_pwdTxt; placeholderText: "pwd"; readOnly: false; placeholderTextColor: "gray"; text: ""}
+            PropertyChanges { target:id_siteTxt; placeholderText: "website"; readOnly: false; placeholderTextColor: "gray"; text: ""}
+            PropertyChanges { target:id_notesTxt; placeholderText: "notes..."; readOnly: false; placeholderTextColor: "gray"; text: ""}
 
             PropertyChanges { target:id_btnCancel; visible: true}
             PropertyChanges { target:id_btnSave; visible: true}
@@ -114,11 +177,11 @@ Item {
         },
         State{
             name: "stEdit"
-            PropertyChanges { target:id_keyTxt; pr_readOnly: false; pr_textColor: "gray"}
-            PropertyChanges { target:id_userTxt; pr_readOnly: false; pr_textColor: "gray"}
-            PropertyChanges { target:id_pwdTxt; pr_readOnly: false; pr_textColor: "gray"}
-            PropertyChanges { target:id_siteTxt; pr_readOnly: false; pr_textColor: "gray"}
-            PropertyChanges { target:id_notesTxt; pr_readOnly: false; pr_textColor: "gray"}
+            PropertyChanges { target:id_keyTxt; readOnly: false;}
+            PropertyChanges { target:id_userTxt; readOnly: false;}
+            PropertyChanges { target:id_pwdTxt; readOnly: false;}
+            PropertyChanges { target:id_siteTxt; readOnly: false;}
+            PropertyChanges { target:id_notesTxt; readOnly: false;}
 
             PropertyChanges { target:id_btnCancel;  visible: true}
             PropertyChanges { target:id_btnSave;  visible: true}
@@ -127,11 +190,11 @@ Item {
         },
         State{
             name: "stView"
-            PropertyChanges { target:id_keyTxt; pr_readOnly: true}
-            PropertyChanges { target:id_userTxt; pr_readOnly: true}
-            PropertyChanges { target:id_pwdTxt; pr_readOnly: true}
-            PropertyChanges { target:id_siteTxt; pr_readOnly: true}
-            PropertyChanges { target:id_notesTxt; pr_readOnly: true}
+            PropertyChanges { target:id_keyTxt; readOnly: true}
+            PropertyChanges { target:id_userTxt; readOnly: true}
+            PropertyChanges { target:id_pwdTxt; readOnly: true}
+            PropertyChanges { target:id_siteTxt; readOnly: true}
+            PropertyChanges { target:id_notesTxt; readOnly: true}
 
             PropertyChanges { target:id_btnEdit; visible: true}
             PropertyChanges { target:id_btnDelete; visible: true}

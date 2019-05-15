@@ -1,6 +1,7 @@
 #include "pwdhandler.h"
 #include "qdebug.h"
 #include <QFile>
+#include <QFileInfo>
 
 PwdHandler::PwdHandler()
 {
@@ -41,9 +42,27 @@ void PwdHandler::loadJsonFile(){
 
     jsonFile.setFileName(myFile);
 
-    jsonFile.open(QIODevice::ReadOnly);
-    fileContent = jsonFile.readAll();
-    jsonFile.close();
+    if(jsonFile.exists()){
+        qDebug("File exists");
+
+        jsonFile.open(QIODevice::ReadOnly);
+        fileContent = jsonFile.readAll();
+
+        jsonFile.close();
+    }
+    else {
+        qDebug("File not exists\n Creating it");
+        jsonFile.open(QIODevice::ReadWrite);
+        jsonFile.write("{\"test\": {\"Notes\": \"1\",\"Pwd\": \"2\",\"Site\": \"3\",\"User\": \"4\"}}");
+        fileContent = jsonFile.readAll();
+        jsonFile.close();
+    }
+
+
+    QFileInfo fileInfo(jsonFile.fileName());
+    QString filename(fileInfo.absoluteFilePath());
+    qDebug("Path: ");
+    qDebug()<<filename;
 
     //Parse file
     json_dcto = QJsonDocument::fromJson(fileContent.toUtf8());

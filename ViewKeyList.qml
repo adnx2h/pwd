@@ -1,5 +1,5 @@
 import QtQuick 2.7
-import QtQuick.Controls 2.0
+import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.0
 
 Item {
@@ -7,55 +7,77 @@ Item {
     width: 480
     height: 800
     signal sgnChangeState(string theNewState)
+    GroupBox{
+        id: id_keyListBox
+        anchors.fill: parent
+        anchors.margins: 12
+        anchors.bottomMargin: 20
 
-    Component {
-        id: id_DelegateKeys
-        Rectangle{
-            height: 100
-            width: 250
-            border.color: "black"
-            MouseArea{
-                anchors.fill: parent
-                onClicked:{
-                    sgnChangeState("stView")
-                    idPwdHandler.requestDataOfIndex(index)
+        label: Label{
+            text: "Choose an account to see details"
+            color: globalFontColor
+            font.pixelSize: 20
+        }
+
+        Component {
+            id: id_DelegateKeys
+            RowLayout{
+                Rectangle{
+                    height: 50
+                    width: 250
+                    border.color: "black"
+                    color: index % 2 == 0 ? "#171E32" : "#111526"
+                    MouseArea{
+                        anchors.fill: parent
+                        onClicked:{
+                            sgnChangeState("stView")
+                            idPwdHandler.requestDataOfIndex(index)
+                        }}
+                    Text {
+                        text: modelData
+                        color: globalFontColor
+                        font.pixelSize: 25
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.horizontalCenter: parent.horizontalCenter
+                    }
                 }
             }
+        }
 
-            Text {
-                text: modelData
-                //                font.pixelSize: 30
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.horizontalCenter: parent.horizontalCenter
+        ListView{
+            id: idListViewKeys
+            anchors.fill: parent
+            model: keysModel
+            delegate: id_DelegateKeys
+            clip: true
+            onCurrentItemChanged:{
+                //            console.log("Fromlistview " + idListViewKeys.currentIndex)
+            }
+            ScrollBar.vertical: ScrollBar {
+                active: true
             }
         }
-    }
 
-    ListView{
-        id: idListViewKeys
-        anchors.rightMargin: 20
-        anchors.bottomMargin: 20
-        anchors.leftMargin: 20
-        anchors.topMargin: 20
-        anchors.fill: parent
-        model: keysModel
-        delegate: id_DelegateKeys
-        onCurrentItemChanged:{
-            //            console.log("Fromlistview " + idListViewKeys.currentIndex)
-        }
-        ScrollBar.vertical: ScrollBar {
-            active: true
-        }
-    }
-
-    Button {
-        id: idbtn_Add
-        x: 300
-        y: 700
-        text: qsTr("Add pwd")
-        onClicked: {
-            sgnChangeState("stAdd")
-            id_SwipeView.currentIndex = 1
+        RoundButton {
+            id: id_add_del
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            width: 60; height: 60
+            text: qsTr("+")
+            font.pixelSize: 50
+            font.bold: true
+            palette {
+                button: "#2A4B8D"
+            }
+            ColorAnimation {
+                from: "#4B62C1"
+                to: "#2A4B8D"
+                duration: 200
+            }
+            onClicked: {
+                sgnChangeState("stAdd")
+                id_SwipeView.currentIndex = 1
+            }
         }
     }
 }

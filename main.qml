@@ -8,6 +8,8 @@ ApplicationWindow {
     width: 480
     height: 800
     title: qsTr("=adn pwd=")
+    color: "#242C42"
+    property color globalFontColor: "#C5C5C9"
 
     SwipeView {
         id: id_SwipeView
