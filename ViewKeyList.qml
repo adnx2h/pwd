@@ -63,9 +63,14 @@ Item {
             anchors.right: parent.right
             anchors.bottom: parent.bottom
             width: 60; height: 60
-            text: qsTr("+")
-            font.pixelSize: 50
-            font.bold: true
+            Text {
+                text: qsTr("+")
+                color: globalFontColor
+                font.pixelSize: 50
+                font.bold: true
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
             palette {
                 button: "#2A4B8D"
             }

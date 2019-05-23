@@ -3,6 +3,7 @@
 #include <QFile>
 #include <QFileInfo>
 
+
 PwdHandler::PwdHandler()
 {
 
@@ -37,35 +38,23 @@ void PwdHandler::loadJsonFile(){
     QJsonValue json_val, subObjUser, subObjPwd, subObjSite, subObjNotes;
     QJsonDocument json_dcto;
     QJsonObject json_object;
-    QString fileContent;
-    QFile jsonFile;
+    QString plainFileContent;
+    QByteArray fileQBA;
+    QFile file;
 
-    jsonFile.setFileName(myFile);
+    file.setFileName(myFile);
+    file.open(QIODevice::ReadOnly);
+    fileQBA = file.readAll();
+    plainFileContent = cypher.decryptQBA(fileQBA);
+    file.close();
 
-    if(jsonFile.exists()){
-        qDebug("File exists");
-
-        jsonFile.open(QIODevice::ReadOnly);
-        fileContent = jsonFile.readAll();
-
-        jsonFile.close();
-    }
-    else {
-        qDebug("File not exists\n Creating it");
-        jsonFile.open(QIODevice::ReadWrite);
-        jsonFile.write("{\"test\": {\"Notes\": \"1\",\"Pwd\": \"2\",\"Site\": \"3\",\"User\": \"4\"}}");
-        fileContent = jsonFile.readAll();
-        jsonFile.close();
-    }
-
-
-    QFileInfo fileInfo(jsonFile.fileName());
+    QFileInfo fileInfo(file.fileName());
     QString filename(fileInfo.absoluteFilePath());
     qDebug("Path: ");
     qDebug()<<filename;
 
     //Parse file
-    json_dcto = QJsonDocument::fromJson(fileContent.toUtf8());
+    json_dcto = QJsonDocument::fromJson(plainFileContent.toUtf8());
     json_object = json_dcto.object();
     jsonKeys = json_object.keys();
 
@@ -101,6 +90,7 @@ void PwdHandler::saveToJsonFile() {
     QJsonObject obj;
     QVariantMap map;
     quint16 index;
+    QByteArray dataCrypted;
 
     index = 0;
     foreach(const QString &key, jsonKeys){
@@ -122,7 +112,10 @@ void PwdHandler::saveToJsonFile() {
     }
 
     jsonFile.open(QFile::WriteOnly);
-    jsonFile.write(doc.toJson());
+
+    dataCrypted = cypher.encryptQBA(doc.toJson());
+    //    encrypt(doc.toJson());
+    jsonFile.write(dataCrypted);
     jsonFile.close();
     qDebug()<<"Saved file";
 }

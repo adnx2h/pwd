@@ -3,7 +3,8 @@
 #include <QObject>
 #include <QJsonDocument>
 #include <QJsonObject>
-
+#include <QCryptographicHash>
+#include "crypt.h"
 
 class PwdHandler: public QObject
 {
@@ -12,6 +13,7 @@ public:
     PwdHandler();
     QStringList getKeys();
     void loadJsonFile();
+    Crypt cypher;
 
     Q_SIGNAL void sendPwdDetails(quint8 index,QString key, QString user, QString pwd, QString site, QString notes);
 
