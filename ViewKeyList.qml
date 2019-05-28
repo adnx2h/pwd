@@ -31,7 +31,7 @@ Item {
                         anchors.fill: parent
                         onClicked:{
                             sgnChangeState("stView")
-                            idPwdHandler.requestDataOfIndex(index)
+                            id_pwdHandler.requestDataOfIndex(index)
                         }}
                     Text {
                         text: modelData
@@ -45,13 +45,13 @@ Item {
         }
 
         ListView{
-            id: idListViewKeys
+            id: id_listViewKeys
             anchors.fill: parent
             model: keysModel
             delegate: id_DelegateKeys
             clip: true
             onCurrentItemChanged:{
-                //            console.log("Fromlistview " + idListViewKeys.currentIndex)
+                //            console.log("Fromlistview " + id_listViewKeys.currentIndex)
             }
             ScrollBar.vertical: ScrollBar {
                 active: true
@@ -81,7 +81,7 @@ Item {
             }
             onClicked: {
                 sgnChangeState("stAdd")
-                id_SwipeView.currentIndex = 1
+                id_swipeView.currentIndex = 2
             }
         }
     }

@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
 
 
     //To execute pwdHandler's Q_INVOKABLE methods from QML
-    engine.rootContext()->setContextProperty("idPwdHandler",&pwdHandler);
+    engine.rootContext()->setContextProperty("id_pwdHandler",&pwdHandler);
 
     engine.rootContext()->setContextProperty("keysModel",QVariant::fromValue(keys));
 

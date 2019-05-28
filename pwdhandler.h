@@ -16,12 +16,14 @@ public:
     Crypt cypher;
 
     Q_SIGNAL void sendPwdDetails(quint8 index,QString key, QString user, QString pwd, QString site, QString notes);
+    Q_SIGNAL void sgn_pwdIsOk();
 
-    //
     Q_INVOKABLE bool requestDataOfIndex(quint8);
     Q_INVOKABLE bool deleteDataOfCurrentIndex();
 
     Q_INVOKABLE void saveEditedValues(QString key, QString user, QString pwd, QString site, QString note);
+    Q_INVOKABLE void verifyPWD(QString pwd);
+    Q_INVOKABLE bool changePwd(QString oldPwd, QString newPwd1, QString newPwd2);
 
 private:
     QStringList jsonKeys, jsonUsers, jsonPwds, jsonSites, jsonNotes;

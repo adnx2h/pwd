@@ -6,8 +6,11 @@
 
 PwdHandler::PwdHandler()
 {
+       QObject::connect(&cypher, SIGNAL(sgn_pwdIsOk()),
+                        this, SIGNAL(sgn_pwdIsOk()));
 
 }
+
 QStringList PwdHandler::getKeys(){
     return jsonKeys;
 }
@@ -118,4 +121,12 @@ void PwdHandler::saveToJsonFile() {
     jsonFile.write(dataCrypted);
     jsonFile.close();
     qDebug()<<"Saved file";
+}
+
+void PwdHandler::verifyPWD(QString pwd){
+    cypher.verifyPwd(pwd);
+}
+
+bool PwdHandler::changePwd(QString oldPwd, QString newPwd1, QString newPwd2){
+    return cypher.changePwd(oldPwd, newPwd1, newPwd2);
 }

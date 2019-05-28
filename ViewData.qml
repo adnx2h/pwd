@@ -60,9 +60,9 @@ Item {
                         duration: 200
                     }
                     onClicked: {
-                        idPwdHandler.saveEditedValues(id_keyTxt.text, id_userTxt.text, id_pwdTxt.text, id_siteTxt.text, id_notesTxt.text)
-                        //            idPwdHandler.loadJsonFile()
-                        id_SwipeView.currentIndex = 0
+                        id_pwdHandler.saveEditedValues(id_keyTxt.text, id_userTxt.text, id_pwdTxt.text, id_siteTxt.text, id_notesTxt.text)
+                        //            id_pwdHandler.loadJsonFile()
+                        id_swipeView.currentIndex = 1
                     }
                 }
 
@@ -101,8 +101,8 @@ Item {
                         duration: 200
                     }
                     onClicked: {
-                        idPwdHandler.deleteDataOfCurrentIndex()
-                        id_SwipeView.currentIndex = 0
+                        id_pwdHandler.deleteDataOfCurrentIndex()
+                        id_swipeView.currentIndex = 1
                     }
                 }
                 RoundButton {
@@ -121,7 +121,7 @@ Item {
                         duration: 200
                     }
                     onClicked: {
-                        id_SwipeView.currentIndex = 0
+                        id_swipeView.currentIndex = 1
                         id_DataForm.state = "stAdd"
                     }
                 }
@@ -142,7 +142,7 @@ Item {
                     }
                     onClicked: {
                         id_DataForm.state = "stEdit"
-                        //            idPwdHandler.saveEditedValues(id_keyTxt.pr_text, id_userTxt.pr_text, id_pwdTxt.pr_text, id_siteTxt.pr_text, id_notesTxt.pr_text)
+                        //            id_pwdHandler.saveEditedValues(id_keyTxt.pr_text, id_userTxt.pr_text, id_pwdTxt.pr_text, id_siteTxt.pr_text, id_notesTxt.pr_text)
                     }
                 }
             }
@@ -150,7 +150,7 @@ Item {
     }
 
     Connections{
-        target: idPwdHandler
+        target: id_pwdHandler
         onSendPwdDetails:{
             id_keyTxt.text = key
             id_userTxt.text = user
