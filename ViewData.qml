@@ -36,11 +36,16 @@ Item {
             DataField{
                 id: id_siteTxt
             }
-            DataField{
+            TextArea{
                 id: id_notesTxt
                 Layout.rowSpan: 5
                 Layout.fillHeight: true
                 Layout.fillWidth: true
+                color: globalFontColor
+                font.pixelSize: 20
+                background: Rectangle{
+                    color: "#171E32"
+                }
             }
 
             RowLayout{

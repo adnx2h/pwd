@@ -30,6 +30,7 @@ Item {
                 Layout.preferredWidth: id_loginLayout.width *.4
                 echoMode: TextField.Password
                 font.pixelSize: 10
+                horizontalAlignment: TextField.AlignHCenter
             }
             RoundButton {
                 id: id_btnLogin
@@ -78,6 +79,7 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
             GridLayout {
                 columns: 2
+                rowSpacing: 15
                 Layout.alignment: Qt.AlignCenter
                 Label { text: "Old pwd"; color: globalFontColor; font.bold: true; Layout.preferredWidth: parent.width * .3 }
                 DataField {
@@ -87,6 +89,7 @@ Item {
                     Layout.preferredWidth: id_changePwdLayout.width *.5
                     echoMode: TextField.Password
                     font.pixelSize: 10
+                    horizontalAlignment: TextField.AlignHCenter
                 }
                 Label { text: "New pwd"; color: globalFontColor; font.bold: true }
                 DataField {
@@ -96,6 +99,7 @@ Item {
                     Layout.preferredWidth: id_changePwdLayout.width *.5
                     echoMode: TextField.Password
                     font.pixelSize: 10
+                    horizontalAlignment: TextField.AlignHCenter
                 }
                 Label { text: "Repeat new pwd"; color: globalFontColor; font.bold: true }
                 DataField {
@@ -105,6 +109,7 @@ Item {
                     Layout.preferredWidth: id_changePwdLayout.width *.5
                     echoMode: TextField.Password
                     font.pixelSize: 10
+                    horizontalAlignment: TextField.AlignHCenter
                 }
             }
             RoundButton {
