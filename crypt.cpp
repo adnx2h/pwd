@@ -19,32 +19,57 @@ QString Crypt::decryptQBA(QByteArray fileQBA){
 }
 
 void Crypt::verifyPwd(QString pwd){
-    qDebug()<<"Pwd entered: "<<pwd;
-    QByteArray hash = QCryptographicHash::hash(pwd.toLocal8Bit(), QCryptographicHash::Sha256);
-    QByteArray masterHash = QCryptographicHash::hash(masterPwd.toLocal8Bit(), QCryptographicHash::Sha256);
+    QByteArray hashedPwd = hashPwd(pwd);
 
-    if (hash.compare(masterHash)){
-        qDebug()<<"Wrong Password";
-    }
-    else{
+    QString qsPwd = pwdSettings.readSettings("Security","pwd");
+
+    if (this->BAtoQString(hashedPwd) == qsPwd){
         qDebug()<<"Same Password";
         Q_EMIT sgn_pwdIsOk();
     }
-}
-
-void Crypt::savePwd(QString pwd){
-    Q_UNUSED(pwd);
-}
-
-bool Crypt::changePwd(QString oldPwd, QString newPwd1, QString newPwd2){
-    Q_UNUSED(oldPwd);
-    if(QString::compare(newPwd1, newPwd2, Qt::CaseSensitive)){
-        qDebug()<<"not same pwd";
-        return false;
-    }
     else{
-        qDebug()<<"samePwd";
-        return true;
+        qDebug()<<"Incorrect Password";
+        Q_EMIT sgn_pwdNotOk();
     }
+}
 
+bool Crypt::changePwd(QString oldPwd, QString newPwd, QString repeatPwd){
+    if(QString::compare(hashPwd(oldPwd), pwdSettings.readSettings("Security","pwd"), Qt::CaseSensitive)){
+        qDebug()<<"not same pwd";
+        Q_EMIT sgn_pwdNotOk();
+        return false;
+    }else{
+        if(QString::compare(newPwd, repeatPwd, Qt::CaseSensitive)){
+            qDebug()<<"both new pwd are diffetent";
+            Q_EMIT sgn_pwdNotOk();
+            return false;
+        }
+        else{
+            qDebug()<<"All is ok, changing pwd";
+            QString qsHashPwd;
+            QByteArray qba;
+
+            qba = hashPwd(newPwd);
+            qsHashPwd = this->BAtoQString(qba);
+
+            pwdSettings.writeSettings("Security","pwd", qsHashPwd);
+            return true;
+        }
+    }
+}
+
+QByteArray Crypt::hashPwd(QString pwd){
+    QByteArray pwdHashed = QCryptographicHash::hash(pwd.toLocal8Bit(), QCryptographicHash::Sha256);
+    return pwdHashed;
+}
+
+QByteArray Crypt::QStoByteArray(QString qs){
+    QByteArray ba;
+    ba = qs.toUtf8();
+    return ba;
+}
+
+QString Crypt::BAtoQString(QByteArray ba){
+    QString qs = QString(ba);
+    return qs;
 }

@@ -4,7 +4,8 @@ CONFIG += c++11
 
 SOURCES += main.cpp \
     crypt.cpp \
-    pwdhandler.cpp
+    pwdhandler.cpp \
+    settings.cpp
 
 RESOURCES += qml.qrc
 
@@ -32,4 +33,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     crypt.h \
-    pwdhandler.h
+    pwdhandler.h \
+    settings.h

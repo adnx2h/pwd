@@ -47,8 +47,15 @@ ApplicationWindow {
     Connections{
         target: id_pwdHandler
         onSgn_pwdIsOk:{
-            console.log("pwd ok pwd ok pwd ok")
+            console.log("pwd Ok")
             id_swipeView.currentIndex = 1;
+        }
+        onSgn_pwdNotOk:{
+            console.log("pwd Not ok")
+            id_login.loginPwdText = ""
+            id_login.changeloginPwdText = ""
+            id_login.newPwdText = ""
+            id_login.repeatPwdText = ""
         }
     }
 }

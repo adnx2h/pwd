@@ -1,10 +1,16 @@
 import QtQuick 2.4
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.0
+import QtGraphicalEffects 1.0
 
 Item {
     id: id_loginForm
     state: "stLogin"
+    property alias loginPwdText: id_txtPwd.text
+    property alias changeloginPwdText: id_txtOldPwd.text
+    property alias newPwdText: id_txtNewPwd.text
+    property alias repeatPwdText: id_txtRepeatPwd.text
+
     GroupBox{
         id: id_loginListBox
         anchors.fill: parent
@@ -31,7 +37,16 @@ Item {
                 echoMode: TextField.Password
                 font.pixelSize: 10
                 horizontalAlignment: TextField.AlignHCenter
+                background: Rectangle{color: "#242C42"}
+                placeholderText: "Password"
             }
+            Rectangle{
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                Layout.preferredWidth: id_loginLayout.width *.4
+                height: 1
+            }
+            Item { Layout.fillHeight: true; Layout.preferredHeight: parent.height * 0.1}
+
             RoundButton {
                 id: id_btnLogin
                 Layout.fillWidth: false
@@ -53,6 +68,7 @@ Item {
                     duration: 200
                 }
                 onClicked: {
+
                     id_pwdHandler.verifyPWD(id_txtPwd.text)
                 }
             }
@@ -77,11 +93,9 @@ Item {
             anchors.right: parent.right
             anchors.left: parent.left
             anchors.verticalCenter: parent.verticalCenter
-            GridLayout {
-                columns: 2
-                rowSpacing: 15
+            ColumnLayout {
+                spacing: 5
                 Layout.alignment: Qt.AlignCenter
-                Label { text: "Old pwd"; color: globalFontColor; font.bold: true; Layout.preferredWidth: parent.width * .3 }
                 DataField {
                     id: id_txtOldPwd
                     Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -90,8 +104,15 @@ Item {
                     echoMode: TextField.Password
                     font.pixelSize: 10
                     horizontalAlignment: TextField.AlignHCenter
+                    background: Rectangle{color: "#242C42"}
+                    placeholderText: "Current Password"
                 }
-                Label { text: "New pwd"; color: globalFontColor; font.bold: true }
+                Rectangle{
+                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                    Layout.preferredWidth: id_loginLayout.width *.4
+                    height: 1
+                }
+                Item { Layout.fillHeight: true; Layout.preferredHeight: parent.height * 0.1}
                 DataField {
                     id: id_txtNewPwd
                     Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -100,8 +121,15 @@ Item {
                     echoMode: TextField.Password
                     font.pixelSize: 10
                     horizontalAlignment: TextField.AlignHCenter
+                    background: Rectangle{color: "#242C42"}
+                    placeholderText: "New Password"
                 }
-                Label { text: "Repeat new pwd"; color: globalFontColor; font.bold: true }
+                Rectangle{
+                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                    Layout.preferredWidth: id_loginLayout.width *.4
+                    height: 1
+                }
+                Item { Layout.fillHeight: true; Layout.preferredHeight: parent.height * 0.1}
                 DataField {
                     id: id_txtRepeatPwd
                     Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -110,8 +138,17 @@ Item {
                     echoMode: TextField.Password
                     font.pixelSize: 10
                     horizontalAlignment: TextField.AlignHCenter
+                    background: Rectangle{color: "#242C42"}
+                    placeholderText: "Repeat Password"
                 }
+                Rectangle{
+                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                    Layout.preferredWidth: id_loginLayout.width *.4
+                    height: 1
+                }
+                Item { Layout.fillHeight: true; Layout.preferredHeight: parent.height * 0.1}
             }
+            Item { Layout.fillHeight: true; Layout.preferredHeight: parent.height * 0.1}
             RoundButton {
                 id: id_btnChangePwd
                 Layout.alignment: Qt.AlignCenter
