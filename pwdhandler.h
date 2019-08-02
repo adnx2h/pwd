@@ -17,7 +17,7 @@ public:
 
     Q_SIGNAL void sendPwdDetails(quint8 index,QString key, QString user, QString pwd, QString site, QString notes);
     Q_SIGNAL void sgn_pwdIsOk();
-    Q_SIGNAL void sgn_pwdNotOk();
+    Q_SIGNAL void sgn_pwdNotOk(QString popupTitle, QString popupMsg);
 
     Q_INVOKABLE bool requestDataOfIndex(quint8);
     Q_INVOKABLE bool deleteDataOfCurrentIndex();

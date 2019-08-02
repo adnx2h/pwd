@@ -15,7 +15,7 @@ public:
     bool changePwd(QString oldPwd, QString newPwd, QString repeatPwd);
 
     Q_SIGNAL void sgn_pwdIsOk();
-    Q_SIGNAL void sgn_pwdNotOk();
+    Q_SIGNAL void sgn_pwdNotOk(QString title, QString msg);
 
 private:
     Settings pwdSettings;

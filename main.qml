@@ -21,7 +21,6 @@ ApplicationWindow {
             else
                 id_swipeView.interactive = false
         }
-
         Login{
             id: id_login
         }
@@ -34,7 +33,6 @@ ApplicationWindow {
         }
         ViewData{
             id: id_dataFormObject
-
         }
     }
     PageIndicator {
@@ -51,11 +49,14 @@ ApplicationWindow {
             id_swipeView.currentIndex = 1;
         }
         onSgn_pwdNotOk:{
-            console.log("pwd Not ok")
-            id_login.loginPwdText = ""
-            id_login.changeloginPwdText = ""
-            id_login.newPwdText = ""
-            id_login.repeatPwdText = ""
+            console.log(popupTitle +" " + popupMsg + " pwd Not ok")
+            id_login.pr_loginPwdText = ""
+            id_login.pr_changeloginPwdText = ""
+            id_login.pr_newPwdText = ""
+            id_login.pr_repeatPwdText = ""
+            id_login.pr_popupAlert.open()
+            id_login.pr_popupAlert.pr_popupTitle = popupTitle
+            id_login.pr_popupAlert.pr_popupMessage = popupMsg
         }
     }
 }

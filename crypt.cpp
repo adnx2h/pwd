@@ -29,19 +29,19 @@ void Crypt::verifyPwd(QString pwd){
     }
     else{
         qDebug()<<"Incorrect Password";
-        Q_EMIT sgn_pwdNotOk();
+        Q_EMIT sgn_pwdNotOk("Try Again"," The Password \n is not correct.");
     }
 }
 
 bool Crypt::changePwd(QString oldPwd, QString newPwd, QString repeatPwd){
     if(QString::compare(hashPwd(oldPwd), pwdSettings.readSettings("Security","pwd"), Qt::CaseSensitive)){
         qDebug()<<"not same pwd";
-        Q_EMIT sgn_pwdNotOk();
+        Q_EMIT sgn_pwdNotOk("Error"," Old password \n doesn't match.");
         return false;
     }else{
         if(QString::compare(newPwd, repeatPwd, Qt::CaseSensitive)){
             qDebug()<<"both new pwd are diffetent";
-            Q_EMIT sgn_pwdNotOk();
+            Q_EMIT sgn_pwdNotOk("Error"," Password and \n Confirmation \n differs.");
             return false;
         }
         else{

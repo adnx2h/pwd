@@ -8,8 +8,8 @@ PwdHandler::PwdHandler()
 {
        QObject::connect(&cypher, SIGNAL(sgn_pwdIsOk()),
                         this, SIGNAL(sgn_pwdIsOk()));
-       QObject::connect(&cypher, SIGNAL(sgn_pwdNotOk()),
-                        this, SIGNAL(sgn_pwdNotOk()));
+       QObject::connect(&cypher, SIGNAL(sgn_pwdNotOk(QString, QString)),
+                        this, SIGNAL(sgn_pwdNotOk(QString, QString)));
 }
 
 QStringList PwdHandler::getKeys(){ return jsonKeys; }

@@ -6,5 +6,6 @@
         <file>DataField.qml</file>
         <file>ViewData.qml</file>
         <file>Login.qml</file>
+        <file>AlertInfo.qml</file>
     </qresource>
 </RCC>

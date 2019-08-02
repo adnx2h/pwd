@@ -6,10 +6,21 @@ import QtGraphicalEffects 1.0
 Item {
     id: id_loginForm
     state: "stLogin"
-    property alias loginPwdText: id_txtPwd.text
-    property alias changeloginPwdText: id_txtOldPwd.text
-    property alias newPwdText: id_txtNewPwd.text
-    property alias repeatPwdText: id_txtRepeatPwd.text
+    property alias pr_loginPwdText: id_txtPwd.text
+    property alias pr_changeloginPwdText: id_txtOldPwd.text
+    property alias pr_newPwdText: id_txtNewPwd.text
+    property alias pr_repeatPwdText: id_txtRepeatPwd.text
+    property alias pr_popupAlert: id_popupLogin
+
+    AlertInfo{
+        id: id_popupLogin
+        x: Math.round((parent.width) / 2) - (parent.width/8)
+        y: Math.round((parent.height - height) / 2)
+
+        width: parent.width/2
+        height: parent.height/3
+    }
+
 
     GroupBox{
         id: id_loginListBox
@@ -33,19 +44,19 @@ Item {
                 id: id_txtPwd
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                 Layout.fillWidth: false
-                Layout.preferredWidth: id_loginLayout.width *.4
+                Layout.preferredWidth: id_loginLayout.width *.5
                 echoMode: TextField.Password
-                font.pixelSize: 10
+                font.pixelSize: 15
                 horizontalAlignment: TextField.AlignHCenter
                 background: Rectangle{color: "#242C42"}
                 placeholderText: "Password"
             }
             Rectangle{
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-                Layout.preferredWidth: id_loginLayout.width *.4
+                Layout.preferredWidth: id_loginLayout.width *.5
                 height: 1
             }
-            Item { Layout.fillHeight: true; Layout.preferredHeight: parent.height * 0.1}
+            Item { Layout.fillHeight: true; height: parent.height * 0.1}
 
             RoundButton {
                 id: id_btnLogin
@@ -68,15 +79,18 @@ Item {
                     duration: 200
                 }
                 onClicked: {
-
+//                    id_popup.open()
                     id_pwdHandler.verifyPWD(id_txtPwd.text)
                 }
+
+
             }
-            Item { Layout.fillHeight: true; Layout.preferredHeight: parent.height * 0.5}
+            Item { Layout.fillHeight: true; height: parent.height * 0.5}
             Label{
                 id: id_lblChangePwd
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                 text: "change pwd"
+                font.pixelSize: 15
                 color: globalFontColor
                 MouseArea{
                     anchors.fill: parent
@@ -102,53 +116,53 @@ Item {
                     Layout.fillWidth: false
                     Layout.preferredWidth: id_changePwdLayout.width *.5
                     echoMode: TextField.Password
-                    font.pixelSize: 10
+                    font.pixelSize: 15
                     horizontalAlignment: TextField.AlignHCenter
                     background: Rectangle{color: "#242C42"}
                     placeholderText: "Current Password"
                 }
                 Rectangle{
                     Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-                    Layout.preferredWidth: id_loginLayout.width *.4
+                    Layout.preferredWidth: id_loginLayout.width *.5
                     height: 1
                 }
-                Item { Layout.fillHeight: true; Layout.preferredHeight: parent.height * 0.1}
+                Item { Layout.fillHeight: true; height: parent.height * 0.1}
                 DataField {
                     id: id_txtNewPwd
                     Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                     Layout.fillWidth: false
                     Layout.preferredWidth: id_changePwdLayout.width *.5
                     echoMode: TextField.Password
-                    font.pixelSize: 10
+                    font.pixelSize: 15
                     horizontalAlignment: TextField.AlignHCenter
                     background: Rectangle{color: "#242C42"}
                     placeholderText: "New Password"
                 }
                 Rectangle{
                     Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-                    Layout.preferredWidth: id_loginLayout.width *.4
+                    Layout.preferredWidth: id_loginLayout.width *.5
                     height: 1
                 }
-                Item { Layout.fillHeight: true; Layout.preferredHeight: parent.height * 0.1}
+                Item { Layout.fillHeight: true; height: parent.height * 0.1}
                 DataField {
                     id: id_txtRepeatPwd
                     Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                     Layout.fillWidth: false
                     Layout.preferredWidth: id_changePwdLayout.width *.5
                     echoMode: TextField.Password
-                    font.pixelSize: 10
+                    font.pixelSize: 15
                     horizontalAlignment: TextField.AlignHCenter
                     background: Rectangle{color: "#242C42"}
                     placeholderText: "Repeat Password"
                 }
                 Rectangle{
                     Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-                    Layout.preferredWidth: id_loginLayout.width *.4
+                    Layout.preferredWidth: id_loginLayout.width *.5
                     height: 1
                 }
-                Item { Layout.fillHeight: true; Layout.preferredHeight: parent.height * 0.1}
+                Item { Layout.fillHeight: true; height: parent.height * 0.1}
             }
-            Item { Layout.fillHeight: true; Layout.preferredHeight: parent.height * 0.1}
+            Item { Layout.fillHeight: true; height: parent.height * 0.1}
             RoundButton {
                 id: id_btnChangePwd
                 Layout.alignment: Qt.AlignCenter
@@ -175,6 +189,8 @@ Item {
             }
         }
     }
+
+
     states:[
         State{
             name: "stLogin"
